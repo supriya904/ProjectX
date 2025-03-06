@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import fs from 'fs/promises';
-import path from 'path';
+import { promises as fs } from 'fs';
+import { resolve } from 'path';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -20,7 +20,7 @@ export default defineConfig({
 
               req.on('end', async () => {
                 const userData = JSON.parse(body);
-                const filePath = path.resolve(__dirname, 'src/data/users.json');
+                const filePath = resolve(__dirname, 'src/data/users.json');
                 await fs.writeFile(filePath, JSON.stringify(userData, null, 2));
                 res.statusCode = 200;
                 res.end(JSON.stringify({ success: true }));
