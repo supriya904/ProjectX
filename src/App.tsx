@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Tweet as TweetComponent } from './components/Tweet';
 import { TweetBox } from './components/TweetBox';
+import { SideNav } from './components/SideNav';
+import { TrendingSidebar } from './components/TrendingSidebar';
 import type { Tweet, User } from './types';
 import { Twitter } from 'lucide-react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -55,26 +57,38 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/home" element={
           <div className="min-h-screen bg-gray-50">
-            <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
-              <div className="max-w-2xl mx-auto px-4 py-3 flex items-center">
-                <Twitter className="h-8 w-8 text-blue-500" />
-                <h1 className="text-xl font-bold ml-4">Home</h1>
-              </div>
-            </header>
-            
-            <main className="max-w-2xl mx-auto bg-white min-h-screen border-x border-gray-200">
-              <TweetBox onTweet={handleTweet} />
-              <div>
-                {tweets.map(tweet => (
-                  <TweetComponent
-                    key={tweet.id}
-                    tweet={tweet}
-                    onLike={handleLike}
-                    onRetweet={handleRetweet}
-                  />
-                ))}
-              </div>
-            </main>
+            {/* Left Sidebar */}
+            <div className="fixed left-0 w-72 h-screen">
+              <SideNav />
+            </div>
+
+            {/* Main Content */}
+            <div className="ml-72 mr-96">
+              <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
+                <div className="px-4 py-3">
+                  <h1 className="text-xl font-bold">Home</h1>
+                </div>
+              </header>
+              
+              <main className="bg-white min-h-screen border-x border-gray-200">
+                <TweetBox onTweet={handleTweet} />
+                <div>
+                  {tweets.map(tweet => (
+                    <TweetComponent
+                      key={tweet.id}
+                      tweet={tweet}
+                      onLike={handleLike}
+                      onRetweet={handleRetweet}
+                    />
+                  ))}
+                </div>
+              </main>
+            </div>
+
+            {/* Right Sidebar */}
+            <div className="fixed right-0 top-0 w-96 h-screen overflow-y-auto bg-gray-50">
+              <TrendingSidebar />
+            </div>
           </div>
         } />
       </Routes>
