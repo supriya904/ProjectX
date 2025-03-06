@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import userData from '../data/users.json';
 import SignupModal from './SignupModal';
+import fs from 'fs/promises';
+import path from 'path';
 
 const LandingPage = () => {
   const [username, setUsername] = useState('');
@@ -21,20 +23,59 @@ const LandingPage = () => {
     }
   };
 
-  const handleSignup = (userData: {
+  const handleSignup = async (newUserData: {
     name: string;
     email: string;
+    username: string;
+    password: string;
     dateOfBirth: {
       month: string;
       day: string;
       year: string;
     };
   }) => {
-    // Here you would typically make an API call to create the user
-    console.log('New user data:', userData);
-    // For now, we'll just close the modal and show a success message
-    setIsSignupModalOpen(false);
-    alert('Account created successfully! Please sign in.');
+    try {
+      // Check if username already exists
+      const existingUser = userData.users.find(
+        (u) => u.username === newUserData.username
+      );
+      
+      if (existingUser) {
+        alert('Username already exists. Please choose a different username.');
+        return;
+      }
+
+      // Add new user to the users array
+      const updatedUsers = {
+        users: [...userData.users, {
+          username: newUserData.username,
+          password: newUserData.password,
+          name: newUserData.name,
+          email: newUserData.email,
+          dateOfBirth: newUserData.dateOfBirth
+        }]
+      };
+
+      // Save to file using the Vite dev server
+      const response = await fetch('/api/saveUser', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedUsers),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to save user data');
+      }
+
+      setIsSignupModalOpen(false);
+      alert('Account created successfully! Please sign in.');
+      
+    } catch (error) {
+      console.error('Error saving user:', error);
+      alert('Failed to create account. Please try again.');
+    }
   };
 
   return (

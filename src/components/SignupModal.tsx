@@ -7,6 +7,8 @@ interface SignupModalProps {
   onSignup: (userData: {
     name: string;
     email: string;
+    username: string;
+    password: string;
     dateOfBirth: {
       month: string;
       day: string;
@@ -18,9 +20,12 @@ interface SignupModalProps {
 const SignupModal = ({ isOpen, onClose, onSignup }: SignupModalProps) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const [month, setMonth] = useState('December');
   const [day, setDay] = useState('1');
   const [year, setYear] = useState('2002');
+  const [error, setError] = useState('');
 
   const months = [
     'January', 'February', 'March', 'April', 'May', 'June',
@@ -32,15 +37,29 @@ const SignupModal = ({ isOpen, onClose, onSignup }: SignupModalProps) => {
   const years = Array.from({ length: 100 }, (_, i) => (currentYear - i).toString());
 
   const handleSubmit = () => {
+    if (!name || !email || !username || !password) {
+      setError('All fields are required');
+      return;
+    }
+    
     onSignup({
       name,
       email,
+      username,
+      password,
       dateOfBirth: {
         month,
         day,
         year
       }
     });
+    
+    // Reset form
+    setName('');
+    setEmail('');
+    setUsername('');
+    setPassword('');
+    setError('');
   };
 
   if (!isOpen) return null;
@@ -89,6 +108,26 @@ const SignupModal = ({ isOpen, onClose, onSignup }: SignupModalProps) => {
           </div>
 
           <div>
+            <input
+              type="text"
+              placeholder="Username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              className="w-full bg-black border border-gray-600 rounded text-white px-4 py-3 focus:outline-none focus:border-blue-500"
+            />
+          </div>
+
+          <div>
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full bg-black border border-gray-600 rounded text-white px-4 py-3 focus:outline-none focus:border-blue-500"
+            />
+          </div>
+
+          <div>
             <label className="block text-white mb-2">Date of birth</label>
             <p className="text-gray-500 text-sm mb-4">
               This will not be shown publicly. Confirm your own age, even if this account is for a business, a pet, or something else.
@@ -126,6 +165,10 @@ const SignupModal = ({ isOpen, onClose, onSignup }: SignupModalProps) => {
             </div>
           </div>
         </div>
+
+        {error && (
+          <p className="text-red-500 text-sm mt-4">{error}</p>
+        )}
 
         <button
           onClick={handleSubmit}
