@@ -1,0 +1,19 @@
+{
+  "users": [
+    {
+      "username": "admin",
+      "password": "adminRiya"
+    },
+    {
+      "username": "Mr_Kumar",
+      "password": "Ck@x",
+      "name": "Chandan",
+      "email": "kumar04@gmail.com",
+      "dateOfBirth": {
+        "month": "September",
+        "day": "13",
+        "year": "2002"
+      }
+    }
+  ]
+}
