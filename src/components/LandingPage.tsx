@@ -2,8 +2,6 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import userData from '../data/users.json';
 import SignupModal from './SignupModal';
-import fs from 'fs/promises';
-import path from 'path';
 
 const LandingPage = () => {
   const [username, setUsername] = useState('');
