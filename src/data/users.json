@@ -14,6 +14,28 @@
         "day": "13",
         "year": "2002"
       }
+    },
+    {
+      "username": "chandu",
+      "password": "1235",
+      "name": "sai chandu",
+      "email": "sai@123gamail.com",
+      "dateOfBirth": {
+        "month": "December",
+        "day": "1",
+        "year": "2002"
+      }
+    },
+    {
+      "username": "SupriyaVodnala",
+      "password": "sup123",
+      "name": "Supriya",
+      "email": "supriyavodnala06@gmail.com",
+      "dateOfBirth": {
+        "month": "January",
+        "day": "6",
+        "year": "2002"
+      }
     }
   ]
 }
