@@ -4,6 +4,7 @@ import { TweetBox } from './components/TweetBox';
 import { SideNav } from './components/SideNav';
 import { TrendingSidebar } from './components/TrendingSidebar';
 import { ExplorePage } from './components/ExplorePage';
+import { ProfilePage } from './components/ProfilePage';
 import type { Tweet, User } from './types';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
@@ -108,7 +109,7 @@ function App() {
               <Route path="/messages" element={<div className="p-4">Messages coming soon</div>} />
               <Route path="/communities" element={<div className="p-4">Communities coming soon</div>} />
               <Route path="/premium" element={<div className="p-4">Premium coming soon</div>} />
-              <Route path="/profile" element={<div className="p-4">Profile coming soon</div>} />
+              <Route path="/profile" element={<ProfilePage />} />
             </Routes>
           </main>
 
