@@ -6,6 +6,7 @@ import { TrendingSidebar } from './components/TrendingSidebar';
 import { ExplorePage } from './components/ExplorePage';
 import { ProfilePage } from './components/ProfilePage';
 import { PremiumPage } from './components/PremiumPage';
+import { CommunitiesPage } from './components/CommunitiesPage';
 import type { Tweet, User } from './types';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
@@ -108,7 +109,7 @@ function App() {
               {/* Placeholder routes for other navigation items */}
               <Route path="/notifications" element={<div className="p-4">Notifications coming soon</div>} />
               <Route path="/messages" element={<div className="p-4">Messages coming soon</div>} />
-              <Route path="/communities" element={<div className="p-4">Communities coming soon</div>} />
+              <Route path="/communities" element={<CommunitiesPage />} />
               <Route path="/premium" element={<PremiumPage />} />
               <Route path="/profile" element={<ProfilePage />} />
             </Routes>
