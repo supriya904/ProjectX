@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Tweet as TweetComponent } from './components/Tweet';
 import { TweetBox } from './components/TweetBox';
 import { SideNav } from './components/SideNav';
 import { TrendingSidebar } from './components/TrendingSidebar';
+import { ExplorePage } from './components/ExplorePage';
+import { ProfilePage } from './components/ProfilePage';
+import { PremiumPage } from './components/PremiumPage';
+import { CommunitiesPage } from './components/CommunitiesPage';
 import type { Tweet, User } from './types';
-import { Twitter } from 'lucide-react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import LandingPage from './components/LandingPage';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
 const currentUser: User = {
   id: '1',
@@ -14,6 +16,36 @@ const currentUser: User = {
   username: 'johndoe',
   avatar: 'https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=100&h=100&fit=crop',
 };
+
+function HomePage({ tweets, onTweet, onLike, onRetweet }: { 
+  tweets: Tweet[], 
+  onTweet: (content: string) => void,
+  onLike: (id: string) => void,
+  onRetweet: (id: string) => void 
+}) {
+  return (
+    <div className="min-h-screen border-l border-r border-gray-200">
+      <header className="sticky top-0 z-10 bg-white/80 backdrop-blur-md border-b border-gray-200">
+        <div className="px-4 py-3">
+          <h1 className="text-xl font-bold">Home</h1>
+        </div>
+      </header>
+      <div className="p-4">
+        <TweetBox onTweet={onTweet} />
+        <div className="space-y-4 mt-4">
+          {tweets.map((tweet) => (
+            <TweetComponent
+              key={tweet.id}
+              tweet={tweet}
+              onLike={onLike}
+              onRetweet={onRetweet}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 function App() {
   const [tweets, setTweets] = useState<Tweet[]>([
@@ -53,45 +85,41 @@ function App() {
 
   return (
     <Router>
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/home" element={
-          <div className="min-h-screen bg-gray-50">
-            {/* Left Sidebar */}
-            <div className="fixed left-0 w-72 h-screen">
-              <SideNav />
-            </div>
-
-            {/* Main Content */}
-            <div className="ml-72 mr-96">
-              <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
-                <div className="px-4 py-3">
-                  <h1 className="text-xl font-bold">Home</h1>
-                </div>
-              </header>
-              
-              <main className="bg-white min-h-screen border-x border-gray-200">
-                <TweetBox onTweet={handleTweet} />
-                <div>
-                  {tweets.map(tweet => (
-                    <TweetComponent
-                      key={tweet.id}
-                      tweet={tweet}
-                      onLike={handleLike}
-                      onRetweet={handleRetweet}
-                    />
-                  ))}
-                </div>
-              </main>
-            </div>
-
-            {/* Right Sidebar */}
-            <div className="fixed right-0 top-0 w-96 h-screen overflow-y-auto bg-gray-50">
-              <TrendingSidebar />
-            </div>
+      <div className="min-h-screen bg-white">
+        <div className="flex">
+          <div className="w-72 flex-shrink-0">
+            <SideNav />
           </div>
-        } />
-      </Routes>
+          
+          <main className="flex-1 mr-96">  
+            <Routes>
+              <Route path="/" element={<Navigate to="/home" replace />} />
+              <Route 
+                path="/home" 
+                element={
+                  <HomePage 
+                    tweets={tweets}
+                    onTweet={handleTweet}
+                    onLike={handleLike}
+                    onRetweet={handleRetweet}
+                  />
+                } 
+              />
+              <Route path="/explore" element={<ExplorePage />} />
+              {/* Placeholder routes for other navigation items */}
+              <Route path="/notifications" element={<div className="p-4">Notifications coming soon</div>} />
+              <Route path="/messages" element={<div className="p-4">Messages coming soon</div>} />
+              <Route path="/communities" element={<CommunitiesPage />} />
+              <Route path="/premium" element={<PremiumPage />} />
+              <Route path="/profile" element={<ProfilePage />} />
+            </Routes>
+          </main>
+
+          <div className="w-96 fixed right-0 h-screen">
+            <TrendingSidebar />
+          </div>
+        </div>
+      </div>
     </Router>
   );
 }
