@@ -79,7 +79,7 @@ src/
 
 1. Clone the repository
    ```bash
-   git clone https://github.com/yourusername/twitter-clone.git
+   git clone https://github.com/supriya904/ProjectX.git
    cd twitter-clone
    ```
 
