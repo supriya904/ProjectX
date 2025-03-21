@@ -7,6 +7,7 @@ import { ExplorePage } from './components/ExplorePage';
 import { ProfilePage } from './components/ProfilePage';
 import { PremiumPage } from './components/PremiumPage';
 import { CommunitiesPage } from './components/CommunitiesPage';
+import LandingPage from './components/LandingPage';
 import type { Tweet, User } from './types';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
@@ -86,39 +87,43 @@ function App() {
   return (
     <Router>
       <div className="min-h-screen bg-white">
-        <div className="flex">
-          <div className="w-72 flex-shrink-0">
-            <SideNav />
-          </div>
-          
-          <main className="flex-1 mr-96">  
-            <Routes>
-              <Route path="/" element={<Navigate to="/home" replace />} />
-              <Route 
-                path="/home" 
-                element={
-                  <HomePage 
-                    tweets={tweets}
-                    onTweet={handleTweet}
-                    onLike={handleLike}
-                    onRetweet={handleRetweet}
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="*" element={
+            <div className="flex">
+              <div className="w-72 flex-shrink-0">
+                <SideNav />
+              </div>
+              
+              <main className="flex-1 mr-96">  
+                <Routes>
+                  <Route 
+                    path="/home" 
+                    element={
+                      <HomePage 
+                        tweets={tweets}
+                        onTweet={handleTweet}
+                        onLike={handleLike}
+                        onRetweet={handleRetweet}
+                      />
+                    } 
                   />
-                } 
-              />
-              <Route path="/explore" element={<ExplorePage />} />
-              {/* Placeholder routes for other navigation items */}
-              <Route path="/notifications" element={<div className="p-4">Notifications coming soon</div>} />
-              <Route path="/messages" element={<div className="p-4">Messages coming soon</div>} />
-              <Route path="/communities" element={<CommunitiesPage />} />
-              <Route path="/premium" element={<PremiumPage />} />
-              <Route path="/profile" element={<ProfilePage />} />
-            </Routes>
-          </main>
+                  <Route path="/explore" element={<ExplorePage />} />
+                  {/* Placeholder routes for other navigation items */}
+                  <Route path="/notifications" element={<div className="p-4">Notifications coming soon</div>} />
+                  <Route path="/messages" element={<div className="p-4">Messages coming soon</div>} />
+                  <Route path="/communities" element={<CommunitiesPage />} />
+                  <Route path="/premium" element={<PremiumPage />} />
+                  <Route path="/profile" element={<ProfilePage />} />
+                </Routes>
+              </main>
 
-          <div className="w-96 fixed right-0 h-screen">
-            <TrendingSidebar />
-          </div>
-        </div>
+              <div className="w-96 fixed right-0 h-screen">
+                <TrendingSidebar />
+              </div>
+            </div>
+          } />
+        </Routes>
       </div>
     </Router>
   );
