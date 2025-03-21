@@ -17,7 +17,7 @@ export function TweetBox({ onTweet }: TweetBoxProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="border-b border-gray-200 p-4">
+    <form onSubmit={handleSubmit} className="border-b border-gray-800 p-4">
       <div className="flex gap-4">
         <img
           src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=100&h=100&fit=crop"
@@ -29,7 +29,7 @@ export function TweetBox({ onTweet }: TweetBoxProps) {
             value={content}
             onChange={(e) => setContent(e.target.value)}
             placeholder="What's happening?"
-            className="w-full resize-none border-none focus:ring-0 text-lg"
+            className="w-full resize-none border-none focus:ring-0 text-lg bg-black text-white placeholder-gray-500"
             rows={3}
           />
           <div className="flex justify-between items-center mt-2">

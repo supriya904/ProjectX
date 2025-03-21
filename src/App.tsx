@@ -27,10 +27,10 @@ function HomePage({ tweets, onTweet, onLike, onRetweet }: {
   onRetweet: (id: string) => void 
 }) {
   return (
-    <div className="min-h-screen border-l border-r border-gray-200">
-      <header className="sticky top-0 z-10 bg-white/80 backdrop-blur-md border-b border-gray-200">
+    <div className="min-h-screen border-l border-r border-gray-800">
+      <header className="sticky top-0 z-10 bg-black/80 backdrop-blur-md border-b border-gray-800">
         <div className="px-4 py-3">
-          <h1 className="text-xl font-bold">Home</h1>
+          <h1 className="text-xl font-bold text-white">Home</h1>
         </div>
       </header>
       <div className="p-4">
@@ -88,7 +88,7 @@ function App() {
 
   return (
     <Router>
-      <div className="min-h-screen bg-white">
+      <div className="min-h-screen bg-black text-white">
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="*" element={

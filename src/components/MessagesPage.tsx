@@ -243,22 +243,22 @@ const MessagesPage = () => {
   };
 
   return (
-    <div className="min-h-screen border-l border-r border-gray-200 flex">
+    <div className="min-h-screen border-l border-r border-gray-800 flex">
       {/* Conversations list */}
-      <div className="w-1/3 border-r border-gray-200">
-        <header className="sticky top-0 z-10 bg-white/80 backdrop-blur-md border-b border-gray-200">
+      <div className="w-1/3 border-r border-gray-800">
+        <header className="sticky top-0 z-10 bg-black backdrop-blur-md border-b border-gray-800">
           <div className="px-4 py-3">
-            <h1 className="text-xl font-bold">Messages</h1>
+            <h1 className="text-xl font-bold text-white">Messages</h1>
           </div>
         </header>
         
-        <div className="divide-y divide-gray-200">
+        <div className="divide-y divide-gray-800">
           {conversations.map(conversation => {
             const otherUser = getOtherParticipant(conversation);
             return (
               <button 
                 key={conversation.id}
-                className={`w-full text-left p-4 hover:bg-gray-50 flex items-start space-x-3 ${selectedConversation?.id === conversation.id ? 'bg-blue-50' : ''}`}
+                className={`w-full text-left p-4 hover:bg-gray-900 flex items-start space-x-3 ${selectedConversation?.id === conversation.id ? 'bg-gray-900' : ''}`}
                 onClick={() => handleSelectConversation(conversation)}
               >
                 <img 
@@ -268,13 +268,13 @@ const MessagesPage = () => {
                 />
                 <div className="flex-1 min-w-0">
                   <div className="flex justify-between items-center">
-                    <h3 className="font-semibold truncate">{otherUser.name}</h3>
-                    <span className="text-xs text-gray-500">
+                    <h3 className="font-semibold truncate text-white">{otherUser.name}</h3>
+                    <span className="text-xs text-gray-400">
                       {formatTimestamp(conversation.lastMessage.timestamp)}
                     </span>
                   </div>
                   <div className="flex justify-between items-center mt-1">
-                    <p className={`text-sm truncate ${conversation.unreadCount > 0 ? 'font-semibold text-black' : 'text-gray-500'}`}>
+                    <p className={`text-sm truncate ${conversation.unreadCount > 0 ? 'font-semibold text-white' : 'text-gray-400'}`}>
                       {conversation.lastMessage.senderId === currentUserId ? 'You: ' : ''}
                       {conversation.lastMessage.text}
                     </p>
@@ -295,15 +295,15 @@ const MessagesPage = () => {
       <div className="w-2/3 flex flex-col">
         {selectedConversation ? (
           <>
-            <header className="sticky top-0 z-10 bg-white/80 backdrop-blur-md border-b border-gray-200 p-3 flex items-center space-x-3">
+            <header className="sticky top-0 z-10 bg-black backdrop-blur-md border-b border-gray-800 p-3 flex items-center space-x-3">
               <img 
                 src={getOtherParticipant(selectedConversation).avatar} 
                 alt={getOtherParticipant(selectedConversation).name} 
                 className="w-10 h-10 rounded-full"
               />
               <div>
-                <h2 className="font-semibold">{getOtherParticipant(selectedConversation).name}</h2>
-                <p className="text-xs text-gray-500">@{getOtherParticipant(selectedConversation).username}</p>
+                <h2 className="font-semibold text-white">{getOtherParticipant(selectedConversation).name}</h2>
+                <p className="text-xs text-gray-400">@{getOtherParticipant(selectedConversation).username}</p>
               </div>
             </header>
             
@@ -314,10 +314,10 @@ const MessagesPage = () => {
                   className={`flex ${message.senderId === currentUserId ? 'justify-end' : 'justify-start'}`}
                 >
                   <div 
-                    className={`max-w-xs md:max-w-md rounded-2xl px-4 py-2 ${message.senderId === currentUserId ? 'bg-blue-500 text-white' : 'bg-gray-100'}`}
+                    className={`max-w-xs md:max-w-md rounded-2xl px-4 py-2 ${message.senderId === currentUserId ? 'bg-blue-600 text-white' : 'bg-gray-800 text-white'}`}
                   >
                     <p>{message.text}</p>
-                    <div className={`text-xs mt-1 ${message.senderId === currentUserId ? 'text-blue-100' : 'text-gray-500'}`}>
+                    <div className={`text-xs mt-1 ${message.senderId === currentUserId ? 'text-blue-200' : 'text-gray-400'}`}>
                       {formatTimestamp(message.timestamp)}
                       {message.senderId === currentUserId && (
                         <span className="ml-2">
@@ -330,7 +330,7 @@ const MessagesPage = () => {
               ))}
             </div>
             
-            <div className="border-t border-gray-200 p-3">
+            <div className="border-t border-gray-800 p-3">
               <div className="flex items-center space-x-2">
                 <input
                   type="text"
@@ -338,12 +338,12 @@ const MessagesPage = () => {
                   value={newMessage}
                   onChange={(e) => setNewMessage(e.target.value)}
                   onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
-                  className="flex-1 border border-gray-300 rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="flex-1 border border-gray-700 rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-900 text-white placeholder-gray-500"
                 />
                 <button
                   onClick={handleSendMessage}
                   disabled={!newMessage.trim()}
-                  className="bg-blue-500 text-white rounded-full p-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="bg-blue-500 text-white rounded-full p-2 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-blue-600"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                     <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
@@ -353,7 +353,7 @@ const MessagesPage = () => {
             </div>
           </>
         ) : (
-          <div className="flex-1 flex items-center justify-center text-gray-500">
+          <div className="flex-1 flex items-center justify-center text-gray-400">
             Select a conversation to start messaging
           </div>
         )}
