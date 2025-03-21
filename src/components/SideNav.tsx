@@ -1,5 +1,4 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   Home,
   Search,
@@ -8,11 +7,13 @@ import {
   Users,
   Star,
   User,
-  MoreHorizontal,
+  LogOut,
   Twitter
 } from 'lucide-react';
 
 export const SideNav = () => {
+  const navigate = useNavigate();
+  
   const navItems = [
     { icon: Home, label: 'Home', path: '/home' },
     { icon: Search, label: 'Explore', path: '/explore' },
@@ -23,9 +24,15 @@ export const SideNav = () => {
     { icon: User, label: 'Profile', path: '/profile' }
   ];
 
+  const handleLogout = () => {
+    // In a real app, you would clear auth tokens, user session, etc.
+    // For now, we'll just redirect to the landing page
+    navigate('/');
+  };
+
   return (
     <div className="fixed h-screen p-4 flex flex-col gap-4">
-      <Link to="/home" className="p-2 hover:bg-gray-200 rounded-full w-fit">
+      <Link to="/home" className="p-2 hover:bg-gray-800 rounded-full w-fit">
         <Twitter className="h-8 w-8 text-blue-500" />
       </Link>
       
@@ -34,15 +41,18 @@ export const SideNav = () => {
           <Link
             key={item.label}
             to={item.path}
-            className="flex items-center gap-4 p-3 hover:bg-gray-200 rounded-full w-fit"
+            className="flex items-center gap-4 p-3 hover:bg-gray-800 rounded-full w-fit text-white"
           >
             <item.icon className="h-6 w-6" />
             <span className="text-xl">{item.label}</span>
           </Link>
         ))}
-        <button className="flex items-center gap-4 p-3 hover:bg-gray-200 rounded-full w-fit">
-          <MoreHorizontal className="h-6 w-6" />
-          <span className="text-xl">More</span>
+        <button 
+          onClick={handleLogout}
+          className="flex items-center gap-4 p-3 hover:bg-gray-800 rounded-full w-fit text-red-500"
+        >
+          <LogOut className="h-6 w-6" />
+          <span className="text-xl">Logout</span>
         </button>
       </nav>
 
