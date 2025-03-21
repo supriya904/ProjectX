@@ -8,8 +8,10 @@ import { ProfilePage } from './components/ProfilePage';
 import { PremiumPage } from './components/PremiumPage';
 import { CommunitiesPage } from './components/CommunitiesPage';
 import LandingPage from './components/LandingPage';
+import NotificationsPage from './components/NotificationsPage';
+import MessagesPage from './components/MessagesPage';
 import type { Tweet, User } from './types';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 const currentUser: User = {
   id: '1',
@@ -110,8 +112,8 @@ function App() {
                   />
                   <Route path="/explore" element={<ExplorePage />} />
                   {/* Placeholder routes for other navigation items */}
-                  <Route path="/notifications" element={<div className="p-4">Notifications coming soon</div>} />
-                  <Route path="/messages" element={<div className="p-4">Messages coming soon</div>} />
+                  <Route path="/notifications" element={<NotificationsPage />} />
+                  <Route path="/messages" element={<MessagesPage />} />
                   <Route path="/communities" element={<CommunitiesPage />} />
                   <Route path="/premium" element={<PremiumPage />} />
                   <Route path="/profile" element={<ProfilePage />} />
