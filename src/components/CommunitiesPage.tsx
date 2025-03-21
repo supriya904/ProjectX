@@ -100,24 +100,24 @@ export const CommunitiesPage: FC = () => {
   };
 
   return (
-    <div className="min-h-screen border-l border-r border-gray-200">
+    <div className="min-h-screen border-l border-r border-gray-800">
       {/* Header */}
-      <header className="sticky top-0 z-10 bg-white/80 backdrop-blur-md border-b border-gray-200">
+      <header className="sticky top-0 z-10 bg-black backdrop-blur-md border-b border-gray-800">
         <div className="px-4 py-3">
-          <h1 className="text-xl font-bold">Communities</h1>
+          <h1 className="text-xl font-bold text-white">Communities</h1>
         </div>
       </header>
 
       {/* Tabs */}
-      <div className="flex border-b border-gray-200">
+      <div className="flex border-b border-gray-800">
         <button 
-          className={`flex-1 py-4 font-medium ${activeTab === 'discover' ? 'border-b-2 border-blue-500 font-bold' : 'text-gray-500'}`}
+          className={`flex-1 py-4 font-medium ${activeTab === 'discover' ? 'border-b-2 border-blue-500 font-bold text-white' : 'text-gray-400'}`}
           onClick={() => setActiveTab('discover')}
         >
           Discover
         </button>
         <button 
-          className={`flex-1 py-4 font-medium ${activeTab === 'joined' ? 'border-b-2 border-blue-500 font-bold' : 'text-gray-500'}`}
+          className={`flex-1 py-4 font-medium ${activeTab === 'joined' ? 'border-b-2 border-blue-500 font-bold text-white' : 'text-gray-400'}`}
           onClick={() => setActiveTab('joined')}
         >
           Joined
@@ -125,13 +125,13 @@ export const CommunitiesPage: FC = () => {
       </div>
 
       {/* Search bar */}
-      <div className="p-4 border-b border-gray-200">
+      <div className="p-4 border-b border-gray-800">
         <div className="relative">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
           <input
             type="text"
             placeholder="Search communities"
-            className="w-full pl-10 pr-4 py-2 bg-gray-100 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white"
+            className="w-full pl-10 pr-4 py-2 bg-gray-900 text-white rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-gray-800"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
@@ -140,25 +140,25 @@ export const CommunitiesPage: FC = () => {
 
       {/* Create community button (only on discover tab) */}
       {activeTab === 'discover' && (
-        <div className="p-4 border-b border-gray-200">
-          <button className="flex items-center gap-2 w-full p-3 bg-gray-100 rounded-full hover:bg-gray-200 transition text-left">
-            <div className="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center">
+        <div className="p-4 border-b border-gray-800">
+          <button className="flex items-center gap-2 w-full p-3 bg-gray-900 rounded-full hover:bg-gray-800 transition text-left">
+            <div className="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center">
               <Plus className="text-white" size={20} />
             </div>
             <div>
-              <div className="font-bold">Create a community</div>
-              <div className="text-sm text-gray-500">Connect with people who share your interests</div>
+              <div className="font-bold text-white">Create a community</div>
+              <div className="text-sm text-gray-400">Connect with people who share your interests</div>
             </div>
-            <ChevronRight className="ml-auto text-gray-500" size={20} />
+            <ChevronRight className="ml-auto text-gray-400" size={20} />
           </button>
         </div>
       )}
 
       {/* Communities list */}
-      <div className="divide-y divide-gray-200">
+      <div className="divide-y divide-gray-800">
         {filteredCommunities.length > 0 ? (
           filteredCommunities.map(community => (
-            <div key={community.id} className="p-4 hover:bg-gray-50">
+            <div key={community.id} className="p-4 hover:bg-gray-900">
               <div className="flex gap-3">
                 <img 
                   src={community.image} 
@@ -168,36 +168,36 @@ export const CommunitiesPage: FC = () => {
                 <div className="flex-1">
                   <div className="flex justify-between items-start">
                     <div>
-                      <h3 className="font-bold">{community.name}</h3>
-                      <p className="text-gray-500 text-sm">{formatMemberCount(community.members)}</p>
+                      <h3 className="font-bold text-white">{community.name}</h3>
+                      <p className="text-gray-400 text-sm">{formatMemberCount(community.members)}</p>
                     </div>
                     <button 
-                      className={`px-4 py-1.5 rounded-full text-sm font-bold ${community.isJoined ? 'bg-gray-200 hover:bg-gray-300 text-black' : 'bg-black hover:bg-gray-800 text-white'}`}
+                      className={`px-4 py-1.5 rounded-full text-sm font-bold ${community.isJoined ? 'bg-gray-700 hover:bg-gray-600 text-white' : 'bg-blue-600 hover:bg-blue-700 text-white'}`}
                       onClick={() => toggleJoin(community.id)}
                     >
                       {community.isJoined ? 'Joined' : 'Join'}
                     </button>
                   </div>
-                  <p className="mt-1 text-gray-700">{community.description}</p>
+                  <p className="mt-1 text-gray-300">{community.description}</p>
                   
                   {/* Sample post from community (only for joined communities) */}
                   {community.isJoined && (
-                    <div className="mt-3 p-3 bg-gray-50 rounded-lg border border-gray-200">
+                    <div className="mt-3 p-3 bg-gray-800 rounded-lg border border-gray-700">
                       <div className="flex items-center gap-2 mb-2">
-                        <span className="font-bold text-sm">Recent post</span>
-                        <span className="text-gray-500 text-xs">2h ago</span>
+                        <span className="font-bold text-sm text-white">Recent post</span>
+                        <span className="text-gray-400 text-xs">2h ago</span>
                       </div>
-                      <p className="text-sm">Has anyone tried the new feature that was just released? I'd love to hear your thoughts!</p>
+                      <p className="text-sm text-gray-300">Has anyone tried the new feature that was just released? I'd love to hear your thoughts!</p>
                       <div className="flex gap-4 mt-2">
-                        <button className="flex items-center gap-1 text-gray-500 hover:text-blue-500">
+                        <button className="flex items-center gap-1 text-gray-400 hover:text-blue-500">
                           <MessageCircle size={16} />
                           <span className="text-xs">12</span>
                         </button>
-                        <button className="flex items-center gap-1 text-gray-500 hover:text-green-500">
+                        <button className="flex items-center gap-1 text-gray-400 hover:text-green-500">
                           <Repeat2 size={16} />
                           <span className="text-xs">4</span>
                         </button>
-                        <button className="flex items-center gap-1 text-gray-500 hover:text-red-500">
+                        <button className="flex items-center gap-1 text-gray-400 hover:text-red-500">
                           <Heart size={16} />
                           <span className="text-xs">23</span>
                         </button>
@@ -209,13 +209,13 @@ export const CommunitiesPage: FC = () => {
             </div>
           ))
         ) : (
-          <div className="p-8 text-center text-gray-500">
-            <Users size={48} className="mx-auto mb-4 text-gray-400" />
-            <h3 className="text-lg font-bold mb-1">No communities found</h3>
+          <div className="p-8 text-center text-gray-400">
+            <Users size={48} className="mx-auto mb-4 text-gray-500" />
+            <h3 className="text-lg font-bold mb-1 text-white">No communities found</h3>
             <p>{activeTab === 'joined' ? 'You haven\'t joined any communities yet.' : 'No communities match your search.'}</p>
             {activeTab === 'joined' && (
               <button 
-                className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-full font-bold hover:bg-blue-600"
+                className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-full font-bold hover:bg-blue-700"
                 onClick={() => setActiveTab('discover')}
               >
                 Discover communities
