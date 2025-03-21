@@ -36,6 +36,17 @@
         "day": "6",
         "year": "2002"
       }
+    },
+    {
+      "username": "Supriya",
+      "password": "12345",
+      "name": "Sup",
+      "email": "supriya@gmail.com",
+      "dateOfBirth": {
+        "month": "October",
+        "day": "6",
+        "year": "1985"
+      }
     }
   ]
 }
